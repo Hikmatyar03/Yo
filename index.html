@@ -57,7 +57,17 @@
   </div>
 
   <!-- Background Music -->
-  <audio id="bg-music" src="https://res.cloudinary.com/your-cloud/video/upload/v1/2.mp3" loop></audio>
+  <audio id="bg-music" src="2.mp3" loop></audio>
+
+<script>
+  window.addEventListener("click", function () {
+    const music = document.getElementById("bg-music");
+    music.play().catch(err => console.log("Autoplay blocked:", err));
+  });
+</script>
+
+
+
 
   <script src="script.js"></script>
 </body>
