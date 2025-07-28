@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hammo... I'm Here</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Pacifico&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Cinematic Effects -->
+  <div class="vignette"></div>
+  <div class="film-grain"></div>
+  <div class="bg-stars"></div>
+
+  <!-- Floating Petals & Lights -->
+  <div class="petal" style="--i:1; --delay:0s;"></div>
+  <div class="petal" style="--i:2; --delay:4s;"></div>
+  <div class="light light1"></div>
+  <div class="light light2"></div>
+
+  <!-- Side Glows -->
+  <div class="line left-line"></div>
+  <div class="line right-line"></div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div id="scene-text" class="scene-text"></div>
+
+    <!-- Photo Container -->
+    <div class="photo-container">
+      <img src="1.jpg" alt="Laiba" class="photo laiba" />
+      <img src="2.jpg" alt="You" class="photo you" />
+    </div>
+
+    <!-- Final Input Box -->
+    <div id="reason-box" class="reason-box">
+      <div class="heart-icon">💌</div>
+      <p class="reason-label">Write to Hammo…</p>
+      <p class="reason-subtitle">My Bachaa, whatever’s in your heart —<br>just write one line.</p>
+
+      <div class="input-wrapper">
+        <textarea 
+          id="reason-input" 
+          placeholder="Abey… just say something? ❤️"
+          maxlength="200"
+        ></textarea>
+      </div>
+
+      <p class="instruction">
+        📸 Take a screenshot<br>and send it to me.<br><small>No pressure. Just love.</small>
+      </p>
+
+      <button id="submit-btn">Send to Hammo 💬</button>
+    </div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bg-music" src="2.mp3" loop></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
