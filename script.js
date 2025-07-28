@@ -12,61 +12,51 @@ document.addEventListener("DOMContentLoaded", () => {
   // Set music volume
   bgMusic.volume = 0.25;
 
-  // Play music (handle autoplay)
-  // Play music only after user interaction
-function playMusic() {
-  bgMusic.play()
-    .then(() => {
-      console.log("Music playing");
-      // Optional: Hide the button or show "Music On"
-    })
-    .catch(e => {
-      console.log("Still blocked? Show manual button");
+  // Try to play music (iOS requires interaction)
+  function playMusic() {
+    bgMusic.play().then(() => {
+      console.log("Music is playing");
+    }).catch(e => {
+      console.log("Autoplay failed", e);
       showPlayButton();
     });
+    document.body.removeEventListener("click", playMusic);
+  }
 
-  // Remove listener after first click
-  document.body.removeEventListener("click", playMusic);
-}
+  // Show a button if autoplay fails
+  function showPlayButton() {
+    const btn = document.createElement("button");
+    btn.innerHTML = "🎵 Tap to Listen";
+    btn.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      background: linear-gradient(145deg, #ff6ec7, #9d4edd);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      cursor: pointer;
+      animation: pulse 2s infinite;
+    `;
+    btn.onclick = () => {
+      bgMusic.play().then(() => {
+        btn.style.opacity = "0";
+        setTimeout(() => btn.remove(), 500);
+      }).catch(() => alert("Please tap again..."));
+    };
+    document.body.appendChild(btn);
+  }
 
-// Show a floating music button if needed
-function showPlayButton() {
-  const btn = document.createElement("button");
-  btn.innerHTML = "🎵 Tap to Listen";
-  btn.style.cssText = `
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
-    background: linear-gradient(145deg, #ff6ec7, #9d4edd);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 30px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    cursor: pointer;
-    animation: pulse 2s infinite;
-  `;
-
-  btn.onclick = () => {
-    bgMusic.play().then(() => {
-      btn.style.opacity = "0";
-      setTimeout(() => btn.remove(), 500);
-    }).catch(() => alert("Please try again..."));
-  };
-
-  document.body.appendChild(btn);
-}
-
-// Try autoplay first
-bgMusic.play().catch(() => {
-  // If blocked, wait for any tap/click
-  document.body.addEventListener("click", playMusic, { once: true });
-  // Also show button as fallback
-  setTimeout(showPlayButton, 2000);
-});
+  // Try autoplay first
+  bgMusic.play().catch(() => {
+    document.body.addEventListener("click", playMusic, { once: true });
+    setTimeout(showPlayButton, 2000);
+  });
 
   // Grow glowing lines
   setTimeout(() => {

@@ -6,6 +6,9 @@
   <title>Hammo... I'm Here</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Pacifico&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- iOS Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
 
@@ -58,16 +61,6 @@
 
   <!-- Background Music -->
   <audio id="bg-music" src="2.mp3" loop></audio>
-
-<script>
-  window.addEventListener("click", function () {
-    const music = document.getElementById("bg-music");
-    music.play().catch(err => console.log("Autoplay blocked:", err));
-  });
-</script>
-
-
-
 
   <script src="script.js"></script>
 </body>
